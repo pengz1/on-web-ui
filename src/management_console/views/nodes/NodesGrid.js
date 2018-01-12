@@ -41,6 +41,7 @@ export default class NodesGrid extends Component {
 
   render() {
     let systemInfo = (node, prop) => {
+      console.log("[DEBUG] the current node is :", node);
       let curr = node;
       ['dmi', 'data', 'System Information'].forEach(key => {
         curr = curr && curr[key];

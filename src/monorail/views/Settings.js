@@ -70,7 +70,7 @@ export default class Settings extends Component {
 
     return (
       <div style={css.root}>
-        <div style={{padding: 20}}>
+        <div style={{padding: 100}}>
           <p>
             Do not include "http(s)://" or any other protocol when entering API endpoints.
           </p>
