@@ -94,28 +94,6 @@ export default class EditWorkflow4Poc extends Component {
         </Toolbar>
         <LinearProgress mode={this.state.loading ? 'indeterminate' : 'determinate'} value={100} />
         <div style={{padding: '0 10px 10px'}}>
-          <h5 style={{margin: '15px 0 5px', color: '#666'}}>Workflow Type:</h5>
-          <Select
-              name="node"
-              value={this.state.workflow && this.state.workflow.name || this.props.name}
-              placeholder="Select a workflow graph..."
-              options={templateOptions}
-              onChange={(option) => {
-                let workflow = this.state.workflow;
-                workflow.name = option && option.value;
-                this.setState({ workflow });
-              }} />
-          <h5 style={{margin: '15px 0 5px', color: '#666'}}>Workflow Node:</h5>
-          <Select
-              name="node"
-              value={this.state.workflow && this.state.workflow.node || this.props.nodeId}
-              placeholder="Select a node..."
-              options={nodeOptions}
-              onChange={(option) => {
-                let workflow = this.state.workflow;
-                workflow.node = option && option.value;
-                this.setState({ workflow });
-              }} />
           <h5 style={{margin: '15px 0 5px', color: '#666'}}>Workflow JSON:</h5>
           <JsonEditor
               value={{"options": this.state.workflow && this.state.workflow.options || {}}}

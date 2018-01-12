@@ -2,7 +2,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import radium from 'radium';
-
+import { browserHistory } from 'react-router';
 import { RouteHandler, Link } from 'react-router';
 import {
     AutoComplete,
@@ -12,6 +12,8 @@ import {
     Toolbar,
     ToolbarGroup,
     ToolbarTitle,
+    ToolbarSeparator,
+    LinearProgress,
 
     SelectField,
     MenuItem,
@@ -31,6 +33,7 @@ import CatalogStore from 'src-common/stores/CatalogStore';
 
 import EndpointInput from './EndpointInput';
 import Workflow4Poc from 'src-workflow-editor/views/Workflow4Poc';
+import JsonEditor from 'src-common/views/JsonEditor';
 
 @radium
 export default class Settings2 extends Component {
@@ -176,7 +179,6 @@ export default class Settings2 extends Component {
     disksOptions: {},
     networkDeviceOptions: {},
     visibility: 'hidden', //visible,hidden
-    advancedVisibility: 'hidden', //visible,hidden
     esxiVisibility: 'visible', //visible,hidden
 
     rackhdWSS: this.rackhdWSS,
@@ -213,22 +215,6 @@ export default class Settings2 extends Component {
     return (
       <div style={css.root}>
 
-        <Toggle
-            label={(this.state.enableAuth ? 'Advanced' : 'Enable ESXi') + ' OS Install'}
-            labelPosition="right"
-            onToggle={() => {
-                this.setState({enableAuth: !this.state.enableAuth})
-                let visibility = this.state.advancedVisibility;
-                this.setState({advancedVisibility: visibility === 'visible' ? 'hidden': 'visible'});
-                this.setState({esxiVisibility: visibility === 'hidden' ? 'hidden': 'visible'});
-                this.setState({visibility: visibility === 'hidden' ? 'hidden': 'visible'});
-              }
-            }
-            toggled={this.state.enableAuth} />
-
-        <div>
-            {this.renderAdvancedInstall()}
-        </div>
 
 
         <div className="EditorToolbar" style={divStyle}>
@@ -238,7 +224,7 @@ export default class Settings2 extends Component {
             {this.renderNetworkToolbar()}
         </div>
 
-        <div style={{padding: 10, visibility: this.state.esxiVisibility}}>
+        <div style={{padding: 10}}>
           <p>
            Please fill the following payload.
           </p>
@@ -291,6 +277,10 @@ export default class Settings2 extends Component {
 
 
           </fieldset>
+          <div>
+                {this.renderAdvancedInstall()}
+          </div>
+
 
           <div style={{textAlign: 'left', marginTop: 20}}>
             <RaisedButton secondary={true} label="Start OS Install" onClick={this.updateSettings.bind(this)}/>
@@ -352,17 +342,46 @@ export default class Settings2 extends Component {
 
   renderAdvancedInstall() {
     return (
-      <Toolbar style={{visibility: this.state.advancedVisibility}}>
-        <ToolbarGroup firstChild={true} firstChild={true} >
-            <div className="Workflow4Poc">
-                <Workflow4Poc />
-            </div>
-       </ToolbarGroup>
-      </Toolbar>
+//      <Toolbar>
+//        <ToolbarGroup firstChild={true} lastChild={true} >
+//            <div className="Workflow4Poc">
+//                <Workflow4Poc />
+//            </div>
+//       </ToolbarGroup>
+//      </Toolbar>
+     <div >
+       <Toolbar>
+         <ToolbarGroup key={1} lastChild={true}>
+           <RaisedButton
+               label="Cancel"
+               onClick={this.props.onDone || browserHistory.goBack.bind(this)}
+               disabled={this.state.disabled} />
+           <RaisedButton
+               label="Run"
+               primary={true}
+               onClick={this.saveWorkflow.bind(this)}
+               disabled={this.state.disabled} />
+         </ToolbarGroup>
+       </Toolbar>
+       <LinearProgress mode={this.state.loading ? 'indeterminate' : 'determinate'} value={100} />
+       <div style={{padding: '0 10px 10px'}}>
+         <h5 style={{margin: '15px 0 5px', color: '#666'}}>Workflow JSON:</h5>
+         <JsonEditor
+             value={{"options": this.state.workflow && this.state.workflow.options || {}}}
+             updateParentState={this.updateStateFromJsonEditor.bind(this)}
+             disabled={this.state.disabled}
+             ref="jsonEditor" />
+       </div>
+     </div>
+
     );
   }
 
+    saveWorkflow() {
+    }
 
+    updateStateFromJsonEditor() {
+    }
 
   renderWorkflowSelect(state = this.state) {
     console.log("[DEBUG] esxi version options:", state.options);
@@ -547,9 +566,6 @@ getConfigBoolean(key) {
     this.setState({esxiVisibility: visibility === 'hidden' ? 'hidden': 'visible'});
   }
 
-    consoleLog() {
-        console.log("[DEBUG]======================");
-    }
     postInstallOsWorkflow() {
         let payload = {
             "options": {
