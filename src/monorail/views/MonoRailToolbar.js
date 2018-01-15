@@ -146,6 +146,13 @@ export default class MonoRailToolbar extends Component {
                   primaryText="Workflow Editor" />
             </Link>
 
+            <Link to="/so" style={linkStyle}>
+              <ListItem
+                  style={getLinkStyle('so')}
+                  leftIcon={<FontIcon className="fa fa-fw fa-empire fa-rotate-90" style={getIconStyle('solution')}/>}
+                  primaryText="Solution Center" />
+            </Link>
+
             <Link to="/settings" style={linkStyle}>
               <ListItem
                   style={getLinkStyle('settings')}

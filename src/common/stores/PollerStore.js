@@ -21,6 +21,54 @@ export default class PollerStore extends Store {
       .catch(err => this.error(id, err));
   }
 
+  relateNodeByCommand(node, command, nodeStore) { //Krein: may be should create PollerDataStore
+    return RackHDRestAPIv2_0.api.nodesGetPollersById({identifier: node.id})
+    .then(res => {
+        let pollers = res.obj;
+        let pollerId;
+        pollers.forEach(poller =>{
+            let pollerCommand = poller.config && poller.config.command;
+            if (pollerCommand === command){
+                pollerId = poller.id;
+                return false;
+            }
+        });
+        return RackHDRestAPIv2_0.api.pollersCurrentDataGet({identifier: pollerId})
+        .then(res => {
+            node[command] = res.obj[0][command] || node[command];
+            if(nodeStore) { nodeStore.change(node.id, node);}
+        });
+    });
+  }
+
+  relateNodeByCommands(node, commands, nodeStore) { //Krein: may be should create PollerDataStore
+    return RackHDRestAPIv2_0.api.nodesGetPollersById({identifier: node.id})
+    .then(res => {
+        let pollers = res.obj;
+        let commandPollerMap = {};
+        let promises = [];
+        pollers.forEach(poller =>{
+            let command = poller.config && poller.config.command;
+            if (command && commands.indexOf(command) !== -1) {
+                commandPollerMap[command] = poller.id;
+            }
+        });
+        Object.keys(commandPollerMap).forEach(key => {
+            let id = commandPollerMap[key];
+            let promise = new Promise((resolve) => {
+                return RackHDRestAPIv2_0.api.pollersCurrentDataGet({identifier: id})
+                .then(res => {
+                    node[key] = res.obj[0][key] || node[key];
+                    if(nodeStore) { nodeStore.change(node.id, node);}
+                })
+                .then(resolve, resolve);
+            });
+            promises.push(promise);
+        });
+        return Promise.all(promises);
+    });
+  }
+
   create(id, data) {
     data.id = id;
     return RackHDRestAPIv2_0.api.pollersPost({content: data})

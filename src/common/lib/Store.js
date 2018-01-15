@@ -14,7 +14,7 @@ export default class Store extends EventEmitter {
     this.cache = {};
   }
 
-  static loadCache() {
+  static loadCache() { //Krein: What is this for?
     let jsonCache = window.localStorage.getItem(this.name + '-cache') || '{}';
     try { this.cache = JSON.parse(jsonCache); } catch (err) {}
   }
@@ -44,7 +44,7 @@ export default class Store extends EventEmitter {
   }
 
   loadCache() {
-    this.constructor.loadCache();
+    this.constructor.loadCache(); //Krein Call statice method via constructor??
   }
 
   saveCache() {
@@ -89,7 +89,7 @@ export default class Store extends EventEmitter {
     delete this.messenger;
   }
 
-  list() { throw new Error('Store: Unimplemented list method.'); }
+  list() { throw new Error('Store: Unimplemented list method.'); } //Krein: user redefine is required
   read() { throw new Error('Store: Unimplemented read method.'); }
   create() { throw new Error('Store: Unimplemented create method.'); }
   update() { throw new Error('Store: Unimplemented update method.'); }
@@ -98,8 +98,8 @@ export default class Store extends EventEmitter {
   all(collection = this.collection) {
     return Object.keys(collection)
       .map(id => collection[id])
-      .filter(item => !!item)
-      .concat(collection === this.cache ? this.all(this.cache) : []);
+      .filter(item => !!item) //Krein: Filter non-empty items.
+      .concat(collection === this.cache ? this.all(this.cache) : []); //Krein: what is this for?
   }
 
   each(iterator) {
@@ -160,7 +160,7 @@ export default class Store extends EventEmitter {
       data = this.collection[id];
     }
     let object = this.EntityClass && data ? new this.EntityClass(data) : data;
-    this.collection[id] = object;
+    this.collection[id] = object; //Krein: without EntityClass, it is undefined?
     this.cache[id] = data;
     if (!silent) { this.publish(id); }
     if (this.autoCache) {

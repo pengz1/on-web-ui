@@ -14,6 +14,7 @@ import OperationsCenter from 'src-operations-center/views/OperationsCenter';
 import SKUPacks from 'src-sku-packs/views/SKUPacks';
 import VisualAnalytics from 'src-visual-analytics/views/VisualAnalytics';
 import WorkflowEditor from 'src-workflow-editor/views/WorkflowEditor';
+import SolutionCenter from 'src-solution-center/views/SolutionCenter';
 
 import MonoRailApp from './views/MonoRailApp';
 import Settings from './views/Settings';
@@ -38,6 +39,8 @@ const main = () => {
         <Route name="Visual Analytics" path="/va" component={VisualAnalytics} />
         <Route name="Workflow Editor" path="/we" component={WorkflowEditor} />
         <Route name="Workflow Editor" path="/we/:workflow" component={WorkflowEditor} />
+        <Route name="Solution Center" path="/so" component={SolutionCenter} />
+        <Route name="InstallOS" path="/so/installOS" component={WorkflowEditor} />
         <Route name="Settings" path="/settings" component={Settings} />
         <Route name="Not Found" path="*" component={NotFound} />
       </Route>

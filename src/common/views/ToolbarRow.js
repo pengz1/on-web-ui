@@ -2,12 +2,11 @@
 
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import { Checkbox, FontIcon } from 'material-ui';
+import { FontIcon, Divider } from 'material-ui';
 
-import DataTable from './DataTable';
 import DataTableToolbar from './DataTableToolbar';
 
-export default class ResourceTable extends Component {
+export default class ToolbarRow extends Component {
 
   static propTypes = {
     className: PropTypes.string,
@@ -90,24 +89,18 @@ export default class ResourceTable extends Component {
           color={emcTheme.rawTheme.palette.textColor}
           hoverColor={null} />;
     }
+
     return (
       <div
-          className={'ResourceTable ' + this.props.className}
-          style={this.props.style}>
+        className={'ToolbarRow ' + this.props.className}
+        style={this.props.style}>
         <DataTableToolbar
             icon={icon}
-            label={<Link to={'/mc/' + this.props.routeName}>{this.props.headerContent}</Link>}
+            label={<Link to={this.props.routeName}>{this.props.headerContent}</Link>}
             count={data && data.length || 0}>
             {this.props.toolbarContent}
-        </DataTableToolbar>
-        {this.props.loadingContent}
-        <DataTable
-            ref="table"
-            style={{width: '100%'}}
-            initialData={data}
-            emptyContent={this.props.emptyContent}
-            uniqueName={this.props.routeName}
-            {...this.props.table} />
+        </DataTableToolbar >
+        <Divider style={{marginTop: '0px', height: '1px'}}/>
       </div>
     );
   }

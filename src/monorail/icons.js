@@ -16,5 +16,6 @@ export default {
   skus: 'fa fa-cubes',
   tasks: 'fa fa-puzzle-piece',
   templates: 'fa fa-sticky-note-o',
-  workflows: 'fa fa-code-fork'
+  workflows: 'fa fa-code-fork',
+  solution: 'fa fa-empire'
 };

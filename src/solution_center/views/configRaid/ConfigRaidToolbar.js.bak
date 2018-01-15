@@ -1,0 +1,44 @@
+// Copyright 2015, EMC, Inc.
+
+import React, { Component, PropTypes } from 'react';
+import radium from 'radium';
+
+import {
+    DropDownMenu,
+    MenuItem
+  } from 'material-ui';
+
+
+@radium
+export default class ConfigRaidToolbar extends Component {
+
+  state = {
+    userOption: 1
+  };
+
+  raidOperations = ['createRaid', 'deleteRaid', 'addHotspare', 'refreshRaidCatalog'];
+
+  handleUserOption = (event, index, val) => {
+    this.setState({userOption: val});
+  }
+
+  render() {
+
+  }
+
+  /*
+  render() {
+    return (
+        <div key={"ConfigRaidToolBar"} style={{float:"left"}}>
+            <DropDownMenu key={'DropDown'} value={this.state.userOption} onChange={this.handleUserOption}>
+                {
+                    this.raidOperations.map((item, index) => {
+                        return  <MenuItem key={index} value={index} primaryText={item} />
+                    })
+                }
+            </DropDownMenu>
+        </div>
+    );
+  }
+  */
+}
