@@ -10,7 +10,7 @@ import RackHDRestAPIv2_0 from 'src-common/messengers/RackHDRestAPIv2_0';
 import { FileReceiver, FileStatus } from 'src-common/views/file_uploader';
 import ConfirmDialog from 'src-common/views/ConfirmDialog';
 
-import NodesGrid from './nodes/NodesGrid';
+import NodesGrid from './nodes/NodeGrid';
 import InstallOS from './installOS/InstallOS';
 import ConfigRaid from './configRaid/ConfigRaid';
 import Discovery from './discovery/Discovery';

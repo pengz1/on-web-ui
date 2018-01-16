@@ -41,7 +41,7 @@ export default class PollerStore extends Store {
     });
   }
 
-  relateNodeByCommands(node, commands, nodeStore) { //Krein: may be should create PollerDataStore
+  relateNode(node, commands, nodeStore) { //Krein: may be should create PollerDataStore
     return RackHDRestAPIv2_0.api.nodesGetPollersById({identifier: node.id})
     .then(res => {
         let pollers = res.obj;
@@ -59,7 +59,7 @@ export default class PollerStore extends Store {
                 return RackHDRestAPIv2_0.api.pollersCurrentDataGet({identifier: id})
                 .then(res => {
                     node[key] = res.obj[0][key] || node[key];
-                    if(nodeStore) { nodeStore.change(node.id, node);}
+                    if(nodeStore) { nodeStore.change(node.id, node, true);} //Silent=true to minimize refresh of page
                 })
                 .then(resolve, resolve);
             });

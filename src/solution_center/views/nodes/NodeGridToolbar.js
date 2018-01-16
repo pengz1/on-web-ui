@@ -20,46 +20,13 @@ export default class NodeGridToolbar extends Component {
 
   static propTypes = {
     nodes: PropTypes.any,
-    updateFilters: PropTypes.any
+    updateFilters: PropTypes.any,
+    refresh: PropTypes.any
   }
-
-  state = {
-    //filteredNodes: [],
-    filters: {}, //Krein should put into state or just global parameters?,
-    value: null
-  };
 
   setField = (field, values) => {
     this.props.updateFilters({[field]: values});
   };
-
-  componentDidUpdate () {}
-
-  filterNodes = (typeText, name) => {
-    let currentNodes = this.props.nodes;
-    let filters = this.state.filters;
-    filters[name] = typeText;
-    Object.keys(filters).forEach(key => {
-        let filter = filters[key];
-        let nameList = key.split('.');
-        let newNodes = [];
-        if (filter === "all"){
-            newNodes = currentNodes;
-        } else {
-            currentNodes.forEach(node => {
-                let curr = node;
-                nameList.forEach(key => {
-                    curr = curr && curr[key];
-                });
-                if ( curr === filter) {
-                    newNodes.push(node);
-                }
-            });
-        }
-        currentNodes = newNodes;
-    });
-    this.props.filter(currentNodes);
-  }
 
   renderFieldItems = (fields) => {
     return fields.map((field) => (
@@ -70,6 +37,7 @@ export default class NodeGridToolbar extends Component {
       />
     ));
   }
+
   render() {
     let fields=['type', 'dmi.data.System Information.Manufacturer']
     return (
@@ -77,7 +45,13 @@ export default class NodeGridToolbar extends Component {
         <Toolbar>
             <ToolbarGroup firstChild={true} >
               {this.renderFieldItems(fields)}
-              <RaisedButton label="Refresh" primary={true} onClick={()=>{}} />
+              <RaisedButton
+                label="Refresh"
+                primary={true}
+                disableTouchRipple={false}
+                onClick={()=>{
+                  this.props.refresh();
+                }} />
             </ToolbarGroup>
         </Toolbar>
       </div>

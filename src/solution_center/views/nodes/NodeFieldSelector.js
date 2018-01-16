@@ -40,7 +40,6 @@ export default class NodeGridToolbar extends Component {
   }
 
   handleChange = (event, index, values) => {
-    //this.setState({selected: values.sort()});
     this.setState({selected: values});
   };
 
