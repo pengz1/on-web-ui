@@ -15,6 +15,7 @@ import SKUPacks from 'src-sku-packs/views/SKUPacks';
 import VisualAnalytics from 'src-visual-analytics/views/VisualAnalytics';
 import WorkflowEditor from 'src-workflow-editor/views/WorkflowEditor';
 import SolutionCenter from 'src-solution-center/views/SolutionCenter';
+import Poc from 'src-poc/views/Poc';
 
 import MonoRailApp from './views/MonoRailApp';
 import Settings from './views/Settings';
@@ -48,6 +49,7 @@ const main = () => {
         <Route name="InstallOS" path="/so/installOS" component={WorkflowEditor} />
         <Route name="Settings" path="/settings" component={Settings} />
         <Route name="OsInstallProgress" path="/app" component={App} />
+        <Route name="Poc" path="/poc" component={Poc} />
         <Route name="Not Found" path="*" component={NotFound} />
       </Route>
     </Router>
