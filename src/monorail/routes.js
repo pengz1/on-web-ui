@@ -19,6 +19,11 @@ import SolutionCenter from 'src-solution-center/views/SolutionCenter';
 import MonoRailApp from './views/MonoRailApp';
 import Settings from './views/Settings';
 
+import App from './views/App';
+console.log("-------------------------------");
+console.log(App);
+console.log("-------------------------------");
+
 const main = () => {
   if (global.isUnitTesting) { return; }
 
@@ -42,6 +47,7 @@ const main = () => {
         <Route name="Solution Center" path="/so" component={SolutionCenter} />
         <Route name="InstallOS" path="/so/installOS" component={WorkflowEditor} />
         <Route name="Settings" path="/settings" component={Settings} />
+        <Route name="OsInstallProgress" path="/app" component={App} />
         <Route name="Not Found" path="*" component={NotFound} />
       </Route>
     </Router>
