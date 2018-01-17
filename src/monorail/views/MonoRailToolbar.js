@@ -167,6 +167,12 @@ export default class MonoRailToolbar extends Component {
                   leftIcon={<FontIcon className="fa fa-pie-chart" style={getIconStyle('app')}></FontIcon>}
                   primaryText="App" />
             </Link>
+            <Link to="/poc" style={linkStyle}>
+              <ListItem
+                stlye={getLinkStyle('poc')}
+                leftIcon={<FontIcon className="fa fa-cloud" style={getIconStyle('poc')}></FontIcon>}
+                primaryText="Poc" />
+            </Link>
           </List>
         </div>
         <EMCTab ref="emcTab"

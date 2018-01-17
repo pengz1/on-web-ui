@@ -34,7 +34,8 @@ module.exports = {
       'src-sku-packs': `${__dirname}/src/sku_packs`,
       'src-visual-analytics': `${__dirname}/src/visual_analytics`,
       'src-workflow-editor': `${__dirname}/src/workflow_editor`,
-      'src-solution-center': `${__dirname}/src/solution_center`
+      'src-solution-center': `${__dirname}/src/solution_center`,
+      'src-poc': `${__dirname}/src/poc`
     }
   },
 
@@ -95,7 +96,7 @@ module.exports = {
   devServer: {
     // https: true,
     port: process.env.PORT || 5000,
-    host: '0.0.0.0',
+    host: '10.62.59.196',
     colors: true,
     publicPath: '/',
     disableHostCheck: true,

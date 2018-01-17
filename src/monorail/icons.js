@@ -2,6 +2,7 @@ export default {
   console: 'fa fa-terminal',
   dashboard: 'fa fa-dashboard',
   settings: 'fa fa-cog',
+  poc: 'fa fa-cloud',
 
   // RackHD API Entities
   catalogs: 'fa fa-map-o',
