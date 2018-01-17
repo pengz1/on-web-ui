@@ -98,6 +98,7 @@ export default class NodeGrid extends Component {
         workflow: ['active']
       }
       this.nodes.each(node => {
+          if (node.type === "enclosure") return;
           let promise;
           Object.keys(retrieveObj).forEach(key => {
             promise = new Promise((resolve) => {

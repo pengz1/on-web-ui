@@ -15,15 +15,11 @@ import SKUPacks from 'src-sku-packs/views/SKUPacks';
 import VisualAnalytics from 'src-visual-analytics/views/VisualAnalytics';
 import WorkflowEditor from 'src-workflow-editor/views/WorkflowEditor';
 import SolutionCenter from 'src-solution-center/views/SolutionCenter';
-import Poc from 'src-poc/views/Poc';
 
 import MonoRailApp from './views/MonoRailApp';
 import Settings from './views/Settings';
 
 import App from './views/App';
-console.log("-------------------------------");
-console.log(App);
-console.log("-------------------------------");
 
 const main = () => {
   if (global.isUnitTesting) { return; }
@@ -45,11 +41,9 @@ const main = () => {
         <Route name="Visual Analytics" path="/va" component={VisualAnalytics} />
         <Route name="Workflow Editor" path="/we" component={WorkflowEditor} />
         <Route name="Workflow Editor" path="/we/:workflow" component={WorkflowEditor} />
-        <Route name="Solution Center" path="/so" component={SolutionCenter} />
-        <Route name="InstallOS" path="/so/installOS" component={WorkflowEditor} />
+        {SolutionCenter.routes}
         <Route name="Settings" path="/settings" component={Settings} />
         <Route name="OsInstallProgress" path="/app" component={App} />
-        <Route name="Poc" path="/poc" component={Poc} />
         <Route name="Not Found" path="*" component={NotFound} />
       </Route>
     </Router>

@@ -56,12 +56,6 @@ export default class ConfigRaidToolbar extends Component {
     );
   }
 
-  /*
-  componentDidMount() {
-    this.load(); //Krein: this will load whenever we opened this page, we should use some functions like onClick
-  }
-  */
-
   render() {
     return (
       <div className="ConfigRaidToolbar" style={{float:"left"}}>

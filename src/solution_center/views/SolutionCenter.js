@@ -14,6 +14,7 @@ import NodesGrid from './nodes/NodeGrid';
 import InstallOS from './installOS/InstallOS';
 import ConfigRaid from './configRaid/ConfigRaid';
 import Discovery from './discovery/Discovery';
+import Poc from './bmcConfig/views/Poc';
 
 
 @radium
@@ -74,7 +75,7 @@ export default class SolutionCenter extends Component {
 
     return (
       <div className='SolutionCenter'>
-        <Discovery />
+        <Poc />
         <InstallOS />
         <ConfigRaid />
         <NodesGrid />
@@ -85,6 +86,6 @@ export default class SolutionCenter extends Component {
 }
 
 SolutionCenter.routes = (
-    <Route name="SolutionCenter" path="/so" component={SolutionCenter}>
+    <Route name="Solution Center" path="/so" component={SolutionCenter}>
     </Route>
 )

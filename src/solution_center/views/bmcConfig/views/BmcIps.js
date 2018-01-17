@@ -78,29 +78,22 @@ export default class BmcIps extends Component {
 
     render() {
         return (
-            <div>
-                <ResourceTable
-                    initialEntities={Object.keys(this.state.ips)}
-                    routeName="nodes"
-                    emptyContent="No Data"
-                    headerContent="BMC"
-                    toolbarContent={<AddBmcIp ips={Object.keys(this.state.ips)}
-                                    update={()=>this.updateBmcIpList()}
-                                    alertMsg={(msg)=>this.alertMsg(msg)}/>}
-                    mapper={ip => (
-                        {
-                            BMC: ip,
-                            NodeId: this.state.ips[ip]['nodeId'] || 'N/A',
-                            MAC: this.state.ips[ip]['mac'] || 'N/A',
-                            STATUS: this.state.ips[ip]['status'] || 'N/A'
-                        }
-                    )} />
-                    <Snackbar
-                      open={this.state.pop}
-                      message={this.state.alertmsg}
-                      autoHideDuration={4000}
-                    />
-            </div>
+          <ResourceTable
+              initialEntities={Object.keys(this.state.ips)}
+              routeName="nodes"
+              emptyContent="No Data"
+              headerContent="Manual Discovery"
+              toolbarContent={<AddBmcIp ips={Object.keys(this.state.ips)}
+                              update={()=>this.updateBmcIpList()}
+                              alertMsg={(msg)=>this.alertMsg(msg)}/>}
+              mapper={ip => (
+                  {
+                      BMC: ip,
+                      NodeId: this.state.ips[ip]['nodeId'] || 'N/A',
+                      MAC: this.state.ips[ip]['mac'] || 'N/A',
+                      STATUS: this.state.ips[ip]['status'] || 'N/A'
+                  }
+              )} />
         )
     }
 

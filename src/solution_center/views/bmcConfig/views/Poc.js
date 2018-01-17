@@ -4,7 +4,7 @@ import { EventEmitter } from 'events';
 
 import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
-import radium from 'radium';
+//import radium from 'radium';
 import { Link } from 'react-router';
 
 import SplitView from 'src-common/views/SplitView';
@@ -14,7 +14,7 @@ import { ToolbarGroup } from 'material-ui/Toolbar/ToolbarGroup';
 import { RaisedButton } from 'material-ui/RaisedButton';
 import BmcIps from './BmcIps';
 
-@radium
+//@radium
 export default class Poc extends Component {
 
   static propTypes = {
@@ -68,9 +68,7 @@ export default class Poc extends Component {
         overlay = [];
 
     return (
-      <div className="Poc">
-        <BmcIps />
-      </div>
+      <BmcIps />
     );
   }
 

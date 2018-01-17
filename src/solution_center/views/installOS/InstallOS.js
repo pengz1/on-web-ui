@@ -14,15 +14,6 @@ export default class InstallOS extends Component {
   state = {
   };
 
-  componentWillMount() {
-  }
-
-  componentDidMount() {
-  }
-
-  componentWillUnmount() {
-  }
-
   render() {
     return (
         <ToolbarRow
