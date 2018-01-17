@@ -28,6 +28,7 @@ module.exports = {
       'src-graph-canvas': `${__dirname}/src/graph_canvas`,
       'src-management-console': `${__dirname}/src/management_console`,
       'src-monorail': `${__dirname}/src/monorail`,
+      'src-redux': `${__dirname}/src/redux`,
       'src-network-topology': `${__dirname}/src/network_topology`,
       'src-operations-center': `${__dirname}/src/operations_center`,
       'src-sku-packs': `${__dirname}/src/sku_packs`,

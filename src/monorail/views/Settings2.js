@@ -27,13 +27,13 @@ import Swagger from 'swagger-client';
 import config from 'src-config/index';
 import UserLogin from 'src-common/views/UserLogin';
 import LoginRestAPI from 'src-common/messengers/LoginRestAPI';
-import RackHDRestAPIv2_0 from 'src-common/messengers/RackHDRestAPIv2_0';
 import NodeStore from 'src-common/stores/NodeStore';
 import CatalogStore from 'src-common/stores/CatalogStore';
 
 import EndpointInput from './EndpointInput';
 import Workflow4Poc from 'src-workflow-editor/views/Workflow4Poc';
 import JsonEditor from 'src-common/views/JsonEditor';
+import PayloadPanel from 'src-redux/views/PayloadPanel';
 
 @radium
 export default class Settings2 extends Component {
@@ -48,6 +48,33 @@ export default class Settings2 extends Component {
 
   nodes = new NodeStore();
   catalogs = new CatalogStore();
+  payload = {
+    "nodeId": "nodeId",
+    "workflowName": "workflowName",
+    "options": {
+        "defaults": {
+            "version": "{version}",
+            "repo": "http://{rackhd_ip}/esxi/{version}",
+            "rootPassword": "{rootPassword}",
+            "dnsServers": ["{dnsServers}"],
+            "networkDevices": [
+                {
+                    "device": "{device}",
+                    "ipv4": {
+                        "ipAddr": "{ipAddr}",
+                        "gateway": "{gateway}",
+                        "netmask": "{netmask}"
+                    }
+                }
+            ],
+            "installDisk": "{installDisk}",
+            "postInstallCommands": [
+                "echo This command will run at the end ",
+                "echo of the post installation step"
+            ]
+        }
+    }
+  };
 
   get workflowOperator() {
     return this.context.workflowOperator;
@@ -166,7 +193,6 @@ export default class Settings2 extends Component {
     nodeId: null,
     installDisk: 'sda',
     networkDevice: 'vmnic0',
-    workflowName: 'Graph.InstallESXi',
     rackhdIp: this.getConfigValue('RackHD_API'),
     rootPassword: this.rootPassword,
     dnsServers: this.dnsServers,
@@ -212,9 +238,9 @@ export default class Settings2 extends Component {
     };
 
 
+
     return (
       <div style={css.root}>
-
 
 
         <div className="EditorToolbar" style={divStyle}>
@@ -277,16 +303,9 @@ export default class Settings2 extends Component {
 
 
           </fieldset>
-          <div>
-                {this.renderAdvancedInstall()}
-          </div>
-
-
-          <div style={{textAlign: 'left', marginTop: 20}}>
-            <RaisedButton secondary={true} label="Start OS Install" onClick={this.updateSettings.bind(this)}/>
-          </div>
         </div>
 
+        <PayloadPanel payload={this.payload} updateSettings={this.updateSettings.bind(this)}/>
       </div>
     );
   }
@@ -340,48 +359,6 @@ export default class Settings2 extends Component {
     );
   }
 
-  renderAdvancedInstall() {
-    return (
-//      <Toolbar>
-//        <ToolbarGroup firstChild={true} lastChild={true} >
-//            <div className="Workflow4Poc">
-//                <Workflow4Poc />
-//            </div>
-//       </ToolbarGroup>
-//      </Toolbar>
-     <div >
-       <Toolbar>
-         <ToolbarGroup key={1} lastChild={true}>
-           <RaisedButton
-               label="Cancel"
-               onClick={this.props.onDone || browserHistory.goBack.bind(this)}
-               disabled={this.state.disabled} />
-           <RaisedButton
-               label="Run"
-               primary={true}
-               onClick={this.saveWorkflow.bind(this)}
-               disabled={this.state.disabled} />
-         </ToolbarGroup>
-       </Toolbar>
-       <LinearProgress mode={this.state.loading ? 'indeterminate' : 'determinate'} value={100} />
-       <div style={{padding: '0 10px 10px'}}>
-         <h5 style={{margin: '15px 0 5px', color: '#666'}}>Workflow JSON:</h5>
-         <JsonEditor
-             value={{"options": this.state.workflow && this.state.workflow.options || {}}}
-             updateParentState={this.updateStateFromJsonEditor.bind(this)}
-             disabled={this.state.disabled}
-             ref="jsonEditor" />
-       </div>
-     </div>
-
-    );
-  }
-
-    saveWorkflow() {
-    }
-
-    updateStateFromJsonEditor() {
-    }
 
   renderWorkflowSelect(state = this.state) {
     console.log("[DEBUG] esxi version options:", state.options);
@@ -543,6 +520,7 @@ getConfigBoolean(key) {
 
   updateSettings() {
 
+    console.log("[DEBUG] enter Settings2.js updateSettings");
     this.version = this.state.version;
     this.rootPassword = this.state.rootPassword;
     this.dnsServers = this.state.dnsServers;//TODO: should be array
@@ -556,8 +534,7 @@ getConfigBoolean(key) {
     this.rackhdWSS = this.state.rackhdWSS;
     this.rackhdAPI = this.state.rackhdAPI;
     this.rackhdAuthToken = this.state.rackhdAuthToken;
-    this.consoleLog();
-    this.postInstallOsWorkflow();
+    this.savePayload2Props();
   }
 
   showAdvacedOsWorkflow() {
@@ -566,32 +543,8 @@ getConfigBoolean(key) {
     this.setState({esxiVisibility: visibility === 'hidden' ? 'hidden': 'visible'});
   }
 
-    postInstallOsWorkflow() {
-        let payload = {
-            "options": {
-                "defaults": {
-                    "version": "{version}",
-                    "repo": "http://{rackhd_ip}/esxi/{version}",
-                    "rootPassword": "{rootPassword}",
-                    "dnsServers": ["{dnsServers}"],
-                    "networkDevices": [
-                        {
-                            "device": "{device}",
-                            "ipv4": {
-                                "ipAddr": "{ipAddr}",
-                                "gateway": "{gateway}",
-                                "netmask": "{netmask}"
-                            }
-                        }
-                    ],
-                    "installDisk": "{installDisk}",
-                    "postInstallCommands": [
-                        "echo This command will run at the end ",
-                        "echo of the post installation step"
-                    ]
-                }
-            }
-        };
+    savePayload2Props() {
+        let payload = this.payload;
         payload.options.defaults.version = this.state.version;
         let rackhdShortIp = this.state.rackhdAPI.split('/')[0];
         console.log("[DEBUG]short rackhd IP:", rackhdShortIp);
@@ -601,7 +554,7 @@ getConfigBoolean(key) {
         } else {
             payload.options.defaults.repo = this.state.repoUrl;
         }
-        console.log("[DEBUG]payload repoUrl:", payload.options.defaults.repo );
+        console.log("[DEBUG]payload repoUrl:", payload.options.defaults.repo);
 
         payload.options.defaults.rootPassword = this.state.rootPassword;
         payload.options.defaults.dnsServers[0] = this.state.dnsServers;
@@ -610,44 +563,12 @@ getConfigBoolean(key) {
         payload.options.defaults.networkDevices[0].ipv4.gateway = this.state.gateway;
         payload.options.defaults.networkDevices[0].ipv4.netmask = this.state.netmask;
         payload.options.defaults.installDisk = this.state.installDisk;
+
+        payload["nodeId"]= this.state.nodeId;
+
         console.log("[DEBUG] os install payload:", payload);
         console.log("[DEBUG] nodeId:", this.state.nodeId);
-        console.log("[DEBUG] nodeId:", this.state.installDisk);
-        console.log("[DEBUG] nodeId:", this.state.networkDevice);
-         RackHDRestAPIv2_0.api.nodesPostWorkflowById({
-             body: payload,
-             identifier: this.state.nodeId,
-             name: this.state.workflowName
-         }).then(res => {
-           let workflow = res.obj;
-           console.log("[DEBUG]##### response:", workflow);
-         }).catch((err) => {
-           console.error("[ERROR]:####", err);
-         });
+        console.log("[DEBUG] installDisk:", this.state.installDisk);
+        console.log("[DEBUG] networkDevice:", this.state.networkDevice);
     }
-
-
-
-
-  get rackhdProtocol() {
-    return 'http' + (this.state.enableSSL ? 's' : '') + '://';
-  }
-
-  rackhdAPICheck = ({ resolve, reject }) => {
-    console.log("############# rackhdAPICheck");
-    let swaggerOptions = {
-      usePromise: true,
-      authorizations : {},
-      url: this.rackhdProtocol + this.state.rackhdAPI + '/swagger'
-    };
-    if (this.state.enableAuth === true || this.state.enableAuth === 'true') {
-      swaggerOptions.authorizations['Authentication-Token'] =
-        new Swagger.ApiKeyAuthorization(
-          'Authorization', 'JWT ' + this.state.rackhdAuthToken, 'header');
-    }
-    new Swagger(swaggerOptions).
-      then(() => resolve('Connected to RackHD 2.0 endpoint!')).
-      catch(() => reject('Failed to reach RackHD 2.0endpoint.'));
-  };
-
 }
