@@ -17,7 +17,6 @@ import WorkflowEditor from 'src-workflow-editor/views/WorkflowEditor';
 
 import MonoRailApp from './views/MonoRailApp';
 import Settings from './views/Settings';
-import Settings2 from './views/Settings2';
 
 import App from './views/App';
 console.log("-------------------------------");
@@ -45,7 +44,6 @@ const main = () => {
         <Route name="Workflow Editor" path="/we" component={WorkflowEditor} />
         <Route name="Workflow Editor" path="/we/:workflow" component={WorkflowEditor} />
         <Route name="Settings" path="/settings" component={Settings} />
-        <Route name="Settings2" path="/settings2" component={Settings2} />
         <Route name="OsInstallProgress" path="/app" component={App} />
         <Route name="Not Found" path="*" component={NotFound} />
       </Route>

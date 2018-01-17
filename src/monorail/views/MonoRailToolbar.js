@@ -150,14 +150,7 @@ export default class MonoRailToolbar extends Component {
               <ListItem
                   style={getLinkStyle('settings')}
                   leftIcon={<FontIcon className="fa fa-fw fa-cogs" style={getIconStyle('settings')}></FontIcon>}
-                  primaryText="Settings1" />
-            </Link>
-
-            <Link to="/settings2" style={linkStyle}>
-              <ListItem
-                  style={getLinkStyle('settings')}
-                  leftIcon={<FontIcon className="fa fa-fw fa-cogs" style={getIconStyle('settings')}></FontIcon>}
-                  primaryText="Settings2" />
+                  primaryText="Settings" />
             </Link>
 
             <Link to="/app" style={linkStyle}>

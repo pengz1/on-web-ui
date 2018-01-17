@@ -31,7 +31,6 @@ import NodeStore from 'src-common/stores/NodeStore';
 import CatalogStore from 'src-common/stores/CatalogStore';
 
 import EndpointInput from './EndpointInput';
-import Workflow4Poc from 'src-workflow-editor/views/Workflow4Poc';
 import JsonEditor from 'src-common/views/JsonEditor';
 import PayloadPanel from 'src-redux/views/PayloadPanel';
 
