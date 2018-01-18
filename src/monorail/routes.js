@@ -14,9 +14,11 @@ import OperationsCenter from 'src-operations-center/views/OperationsCenter';
 import SKUPacks from 'src-sku-packs/views/SKUPacks';
 import VisualAnalytics from 'src-visual-analytics/views/VisualAnalytics';
 import WorkflowEditor from 'src-workflow-editor/views/WorkflowEditor';
+import RaidConfig from 'src-raid-config/views/RaidConfig';
 
 import MonoRailApp from './views/MonoRailApp';
 import Settings from './views/Settings';
+
 
 const main = () => {
   if (global.isUnitTesting) { return; }
@@ -39,6 +41,7 @@ const main = () => {
         <Route name="Workflow Editor" path="/we" component={WorkflowEditor} />
         <Route name="Workflow Editor" path="/we/:workflow" component={WorkflowEditor} />
         <Route name="Settings" path="/settings" component={Settings} />
+        <Route name="RAID Config" path="/raidcfg" component={RaidConfig} />
         <Route name="Not Found" path="*" component={NotFound} />
       </Route>
     </Router>
