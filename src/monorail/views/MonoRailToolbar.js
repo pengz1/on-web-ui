@@ -2,7 +2,6 @@
 
 import React, { Component, PropTypes } from 'react';
 import radium from 'radium';
-
 import { RouteHandler, Link } from 'react-router';
 
 import {
@@ -160,7 +159,16 @@ export default class MonoRailToolbar extends Component {
                   primaryText="Settings" />
             </Link>
 
-          </List>
+
+            <Link to="/raidcfg" style={linkStyle}>
+              <ListItem
+                  style={getLinkStyle('raidcfg')}
+                  leftIcon={<FontIcon className="fa fa-envira" style={getIconStyle('raidcfg')}></FontIcon>}
+                  primaryText="RAID Config" />
+            </Link>
+
+        </List>
+
         </div>
         <EMCTab ref="emcTab"
             opacity={this.props.width <= (this.props.collapsedToolbarWidth + 1) ? 0 : 1}/>
