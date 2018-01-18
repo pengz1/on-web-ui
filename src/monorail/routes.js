@@ -51,7 +51,7 @@ const main = () => {
         {SolutionCenter.routes}
         <Route name="InstallOS" path="/so/installOs/:os" component={App} />
         <Route name="Settings" path="/settings" component={Settings} />
-        <Route name="RAID Config" path="/raidcfg" component={RaidConfig} />
+        <Route name="RAID Config" path="/so/raidcfg" component={RaidConfig} />
         <Route name="Not Found" path="*" component={NotFound} />
       </Route>
     </Router>

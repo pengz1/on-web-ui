@@ -159,14 +159,6 @@ export default class MonoRailToolbar extends Component {
                   primaryText="Settings" />
             </Link>
 
-
-            <Link to="/raidcfg" style={linkStyle}>
-              <ListItem
-                  style={getLinkStyle('raidcfg')}
-                  leftIcon={<FontIcon className="fa fa-envira" style={getIconStyle('raidcfg')}></FontIcon>}
-                  primaryText="RAID Config" />
-            </Link>
-
         </List>
 
         </div>

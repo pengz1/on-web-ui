@@ -65,7 +65,7 @@ export default class ConfigRaidToolbar extends Component {
               <IconButton key="nextIcon"
                 tooltip="Next step for RAID operation"
                 style={{float: "left", 'marginLeft': 16}}
-                href={"/we"}>
+                href={"/#/so/raidcfg"}>
                 <FontIcon className={'fa fa-play'} />
               </IconButton>
             </ToolbarGroup>

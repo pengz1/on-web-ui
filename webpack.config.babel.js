@@ -34,9 +34,7 @@ module.exports = {
       'src-sku-packs': `${__dirname}/src/sku_packs`,
       'src-visual-analytics': `${__dirname}/src/visual_analytics`,
       'src-workflow-editor': `${__dirname}/src/workflow_editor`,
-
-      'src-raid-config': `${__dirname}/src/raid_config`
-
+      'src-raid-config': `${__dirname}/src/raid_config`, 
       'src-solution-center': `${__dirname}/src/solution_center`,
       'src-poc': `${__dirname}/src/poc`
 
@@ -100,7 +98,7 @@ module.exports = {
   devServer: {
     // https: true,
     port: process.env.PORT || 5000,
-    host: '10.62.59.196',
+    host: '10.62.59.170',
     colors: true,
     publicPath: '/',
     disableHostCheck: true,
