@@ -13,8 +13,8 @@ import ConfirmDialog from 'src-common/views/ConfirmDialog';
 import NodesGrid from './nodes/NodeGrid';
 import InstallOS from './installOS/InstallOS';
 import ConfigRaid from './configRaid/ConfigRaid';
-import Discovery from './discovery/Discovery';
-import Poc from './bmcConfig/views/Poc';
+import Discovery from './bmcConfig/views/Poc';
+import InstallESXi from 'src-monorail/views/App';
 
 
 @radium
@@ -74,10 +74,10 @@ export default class SolutionCenter extends Component {
     };
 
     return (
-      <div className='SolutionCenter'>
-        <Poc />
-        <InstallOS />
+      <div className='SolutionCenter' style={css.root}>
+        <Discovery />
         <ConfigRaid />
+        <InstallOS />
         <NodesGrid />
       </div>
     );

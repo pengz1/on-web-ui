@@ -51,10 +51,6 @@ export default class InstallOSToolbar extends Component {
     );
   }
 
-  /*componentDidMount() {
-    this.load();
-  }*/
-
   render() {
     return (
       <div className="InstallOSToolbar" style={{float:"left"}}>
@@ -64,7 +60,7 @@ export default class InstallOSToolbar extends Component {
               <IconButton key="nextIcon"
                 tooltip="Next step to install OS"
                 style={{float: "left", 'marginLeft': 16}}
-                href={"/we"}>
+                href={"/#/so/installOs/ESXi"}>
                 <FontIcon className={'fa fa-play'} />
               </IconButton>
             </ToolbarGroup>

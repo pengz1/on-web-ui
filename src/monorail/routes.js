@@ -42,8 +42,8 @@ const main = () => {
         <Route name="Workflow Editor" path="/we" component={WorkflowEditor} />
         <Route name="Workflow Editor" path="/we/:workflow" component={WorkflowEditor} />
         {SolutionCenter.routes}
+        <Route name="InstallOS" path="/so/installOs/:os" component={App} />
         <Route name="Settings" path="/settings" component={Settings} />
-        <Route name="OsInstallProgress" path="/app" component={App} />
         <Route name="Not Found" path="*" component={NotFound} />
       </Route>
     </Router>
