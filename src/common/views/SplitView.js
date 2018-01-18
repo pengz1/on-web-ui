@@ -87,7 +87,7 @@ export default class HorizontalSplitView extends Component {
   css = {
     root: {
       position: 'relative',
-      overflow: 'hidden'
+      overflow: 'hidden' //Krein Content is larger than box, hidden is to hide overflow part
     },
 
     a: {
@@ -102,7 +102,7 @@ export default class HorizontalSplitView extends Component {
       position: 'absolute',
       top: 0,
       left: 0,
-      zIndex: 10,
+      zIndex: 10, //Krein: Picture stackup sequence, larger, fronter
       overflow: 'hidden'
     }
   };
@@ -121,8 +121,7 @@ export default class HorizontalSplitView extends Component {
 
     if (props.orientation === 'horizontal') {
       a = {width: sizeA, height: this.height};
-      b = {width: sizeB, height: this.height,
-            left: sizeA, position: 'absolute', top: 0};
+      b = {width: sizeB, height: this.height, left: sizeA, position: 'absolute', top: 0};
       resize = {
         left: sizeA,
         height: this.height,
@@ -181,13 +180,13 @@ export default class HorizontalSplitView extends Component {
       this.props.orientation,
       props.className
     ].join(' ');
-
+    
     return (
       <div ref="sv" className={className} style={css.root}>
         <div ref="a" className="a" style={css.a}>{props.a(a, this)}</div>
         <div ref="b" className="b" style={css.b}>{props.b(b, this)}</div>
         <div ref="r" className="resize" style={css.resize}
-            onMouseDown={this.resizeSplitView}
+            onMouseDown={this.resizeSplitView} //Krein Why onMouseDown? Not move mouse to it?, and onDoubleClick is useless
             onDoubleClick={this.toggleSplitView}></div>
       </div>
     );

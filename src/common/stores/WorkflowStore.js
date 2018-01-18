@@ -62,4 +62,19 @@ export default class WorkflowStore extends Store {
       .catch(err => this.error(null, err));
   }
 
+  getActiveGraph(nodeId) {
+    return RackHDRestAPIv2_0.api.nodesGetWorkflowById({identifier: nodeId, active: true})
+    .then(res => res.obj)
+    .catch(err => this.error(null, err));
+  }
+
+  relateNode(node, active ,nodeStore) {
+    return this.getActiveGraph(node.id)
+    .then(graph => {
+      node["activeGraph"] = graph[0] || node["activeGraph"];
+      if (nodeStore) {nodeStore.change(node.id, node);}
+    })
+    .catch(err => this.error(null, err));
+  }
+
 }

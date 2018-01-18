@@ -2,6 +2,7 @@ export default {
   console: 'fa fa-terminal',
   dashboard: 'fa fa-dashboard',
   settings: 'fa fa-cog',
+  poc: 'fa fa-cloud',
 
   // RackHD API Entities
   catalogs: 'fa fa-map-o',
@@ -16,5 +17,6 @@ export default {
   skus: 'fa fa-cubes',
   tasks: 'fa fa-puzzle-piece',
   templates: 'fa fa-sticky-note-o',
-  workflows: 'fa fa-code-fork'
+  workflows: 'fa fa-code-fork',
+  solution: 'fa fa-empire'
 };

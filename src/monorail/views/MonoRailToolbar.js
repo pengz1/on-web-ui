@@ -145,12 +145,20 @@ export default class MonoRailToolbar extends Component {
                   primaryText="Workflow Editor" />
             </Link>
 
+            <Link to="/so" style={linkStyle}>
+              <ListItem
+                  style={getLinkStyle('so')}
+                  leftIcon={<FontIcon className="fa fa-fw fa-empire fa-rotate-90" style={getIconStyle('solution')}/>}
+                  primaryText="Solution Center" />
+            </Link>
+
             <Link to="/settings" style={linkStyle}>
               <ListItem
                   style={getLinkStyle('settings')}
                   leftIcon={<FontIcon className="fa fa-fw fa-cogs" style={getIconStyle('settings')}></FontIcon>}
                   primaryText="Settings" />
             </Link>
+
 
             <Link to="/raidcfg" style={linkStyle}>
               <ListItem
@@ -160,6 +168,7 @@ export default class MonoRailToolbar extends Component {
             </Link>
 
         </List>
+
         </div>
         <EMCTab ref="emcTab"
             opacity={this.props.width <= (this.props.collapsedToolbarWidth + 1) ? 0 : 1}/>

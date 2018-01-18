@@ -14,10 +14,18 @@ import OperationsCenter from 'src-operations-center/views/OperationsCenter';
 import SKUPacks from 'src-sku-packs/views/SKUPacks';
 import VisualAnalytics from 'src-visual-analytics/views/VisualAnalytics';
 import WorkflowEditor from 'src-workflow-editor/views/WorkflowEditor';
+
 import RaidConfig from 'src-raid-config/views/RaidConfig';
+
+import SolutionCenter from 'src-solution-center/views/SolutionCenter';
+
 
 import MonoRailApp from './views/MonoRailApp';
 import Settings from './views/Settings';
+
+
+
+import App from './views/App';
 
 
 const main = () => {
@@ -40,6 +48,8 @@ const main = () => {
         <Route name="Visual Analytics" path="/va" component={VisualAnalytics} />
         <Route name="Workflow Editor" path="/we" component={WorkflowEditor} />
         <Route name="Workflow Editor" path="/we/:workflow" component={WorkflowEditor} />
+        {SolutionCenter.routes}
+        <Route name="InstallOS" path="/so/installOs/:os" component={App} />
         <Route name="Settings" path="/settings" component={Settings} />
         <Route name="RAID Config" path="/raidcfg" component={RaidConfig} />
         <Route name="Not Found" path="*" component={NotFound} />

@@ -47,7 +47,9 @@ export default class CatalogStore extends Store {
   }
 
   relateNode(node, source, nodeStore) {
-    return RackHDRestAPIv2_0.api.nodesGetCatalogSourceById({identifier: node.id, source })
+    let sources = (source instanceof Array) ? source : [source];
+    return Promise.all(sources.map(source => {
+      return RackHDRestAPIv2_0.api.nodesGetCatalogSourceById({identifier: node.id, source })
       .then(res => {
         let catalog = res.obj;
         this.change(catalog.id, catalog);
@@ -57,6 +59,7 @@ export default class CatalogStore extends Store {
         }
       })
       .catch(err => this.error(null, err));
+    }));
   }
 
 }

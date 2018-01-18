@@ -28,12 +28,18 @@ module.exports = {
       'src-graph-canvas': `${__dirname}/src/graph_canvas`,
       'src-management-console': `${__dirname}/src/management_console`,
       'src-monorail': `${__dirname}/src/monorail`,
+      'src-redux': `${__dirname}/src/redux`,
       'src-network-topology': `${__dirname}/src/network_topology`,
       'src-operations-center': `${__dirname}/src/operations_center`,
       'src-sku-packs': `${__dirname}/src/sku_packs`,
       'src-visual-analytics': `${__dirname}/src/visual_analytics`,
       'src-workflow-editor': `${__dirname}/src/workflow_editor`,
+
       'src-raid-config': `${__dirname}/src/raid_config`
+
+      'src-solution-center': `${__dirname}/src/solution_center`,
+      'src-poc': `${__dirname}/src/poc`
+
     }
   },
 
@@ -93,10 +99,11 @@ module.exports = {
 
   devServer: {
     // https: true,
-    port: process.env.PORT || 3000,
-    host: '0.0.0.0',
+    port: process.env.PORT || 5000,
+    host: '10.62.59.196',
     colors: true,
     publicPath: '/',
+    disableHostCheck: true,
     contentBase: './static',
     historyApiFallback: true,
     proxy: []

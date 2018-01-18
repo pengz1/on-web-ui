@@ -9,6 +9,13 @@ export default class NodeStore extends Store {
   api = RackHDRestAPIv2_0.url;
   resource = 'nodes';
 
+  listComputeNode(params) {
+    return RackHDRestAPIv2_0.api.nodesGetAll(params)
+        .then(res => {
+            this.recollect(res.obj.filter(o => o.type === 'compute'));
+        }).catch(err => this.error(null, err));
+  }
+
   list(params) {
     return RackHDRestAPIv2_0.api.nodesGetAll(params)
       .then(res => this.recollect(res.obj))
