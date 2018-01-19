@@ -2,8 +2,8 @@
   "Elasticsearch_API": "127.0.0.1:9200",
   "Enable_RackHD_API_Auth": true,
   "Enable_RackHD_SSL": false,
-  "RackHD_WSS": "10.62.59.196:9100",
-  "RackHD_API": "10.62.59.196:9090/api/2.0",
+  "RackHD_WSS": "10.62.59.173:9100",
+  "RackHD_API": "10.62.59.173:9090/api/2.0",
   "RackHD_API_Auth_Token": "",
   "RedFish_API": "127.0.0.1:9090/redfish"
 }

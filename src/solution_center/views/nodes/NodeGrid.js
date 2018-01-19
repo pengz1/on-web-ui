@@ -93,7 +93,7 @@ export default class NodeGrid extends Component {
     .then(() => {
       let promises = [];
       let retrieveObj = {
-        catalogs: ['dmi', 'bmc'],
+        catalogs: ['dmi', 'rmm'], //Krein: How to handle BMC && RMM
         pollers: ['chassis', 'driveHealth'],
         workflow: ['active']
       }
@@ -133,7 +133,7 @@ export default class NodeGrid extends Component {
         Id: <Link to={'/mc/nodes/' + node.id}>{node.id}</Link>,
         SN: systemInfo['Serial Number'] || naStr,
         Manufacturer: systemInfo['Manufacturer'] || naStr,
-        BMC_IP: NodeUtils.getValueByPath(node, 'bmc.data.IP Address') || naStr,
+        BMC_IP: NodeUtils.getValueByPath(node, 'rmm.data.IP Address') || naStr,
         Power: NodeUtils.getPowerInfo(node) || naStr, //Krein Why can't use renderExpandIcon()?
         ActiveGraph: this.renderGraphLink(node.activeGraph) || naStr,
         Misc: <NodePopover data={NodeUtils.getPopoverInfo(node)} nodeId={node.id} />

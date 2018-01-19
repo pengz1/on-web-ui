@@ -20,6 +20,7 @@ export default class Processor {
 
     getBmcNodeList(bmcIps) {
         // Validate all bmc ip
+        /*
         let promises = [];
         Object.keys(bmcIps).forEach(ip => {
             let promise = this.isBmc('admin', 'admin', ip).then(res => {
@@ -27,32 +28,35 @@ export default class Processor {
                 bmcIps[ip].status = res;
             });
             promises.push(promise);
-        });
-        return Promise.all(promises).then(() => {
+        });*/
+        //return Promise.all(promises).then(() => {
             // Then get node list and match bmc info in node's catalog
-            return this.nodes.listComputeNode().then(() =>{
-                let promises = [];
-                this.nodes.each(node => {
-                    let promise = this.catalogs.listNodeSource(node.id, 'bmc')
-                    .then(() => {
-                        let bmcCatalog = Object.keys(this.catalogs.collection)
-                            .filter(o => this.catalogs.collection[o])[0];
-                        let ip = this.catalogs.collection[bmcCatalog].data['IP Address'];
-                        let mac = this.catalogs.collection[bmcCatalog].data['MAC Address'];
+          return this.nodes.listComputeNode().then(() =>{
+              let promises = [];
+              this.nodes.each(node => {
+                  let promise = this.catalogs.listNodeSource(node.id, 'rmm')
+                  .then(() => {
+                      let bmcCatalog = Object.keys(this.catalogs.collection)
+                          .filter(o => this.catalogs.collection[o]);
+                      for (let i=0; i<bmcCatalog.length; i++) {
+                        let ip = this.catalogs.collection[bmcCatalog[i]].data['IP Address'];
+                        let mac = this.catalogs.collection[bmcCatalog[i]].data['MAC Address'];
                         console.log(ip + '  ' + mac )
                         bmcIps[ip].nodeId = node.id;
                         bmcIps[ip].mac = mac;
                         bmcIps[ip].status = 'Discovered';
-                    }).catch((err) => {
-                        console.log('no bmc found: ' + node.id);
-                    });
-                    promises.push(promise);
-                });
-                return Promise.all(promises).then(() => {
-                    return bmcIps;
-                });
-            });
-        });
+                      }
+                  }).catch((err) => {
+                      console.log('no bmc found: ' + node.id);
+                  });
+                  promises.push(promise);
+              });
+              return Promise.all(promises).then(() => {
+                console.log(bmcIps)
+                  return bmcIps;
+              });
+          });
+        //});
     }
 
     isBmc(user, passwd, host) {
